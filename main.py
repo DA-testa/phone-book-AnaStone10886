@@ -24,7 +24,8 @@ def process_queries(queries):
             # we should rewrite contact's name
             contacts.update({cur_query.number:cur_query.name})
         elif cur_query.type == 'del':
-            contacts.pop(cur_query.number)
+            if contacts.setdefault(cur_query.number) != None:
+                contacts.pop(cur_query.number)
         else:
             response = ' '
             if contacts.setdefault(cur_query.number) == None:
